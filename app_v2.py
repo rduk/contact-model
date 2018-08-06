@@ -20,10 +20,12 @@ class ContactModelAll(Resource):
         email = request.args.get('email') if request.args.get('email') else request.form.get('email')
         fname = request.args.get('fname') if request.args.get('fname') else request.form.get('fname')
         sname = request.args.get('sname') if request.args.get('sname') else request.form.get('sname')
-        multiple_name = request.args.get('mulemail') if request.args.get('mulemail') else request.form.get('mulemail')
+        multiple_email = request.args.get('mulemail') if request.args.get('mulemail') else request.form.get('mulemail')
         contact = models.Contact(uname, email, fname, sname)
-        multiemail = models.MultiEmail()
         db.session.add(contact)
+        id = db.session.query(models.Contact.id).filter_by(uname=uname).first()
+        multiemail = models.MultiEmail(id[0], multiple_email)
+        db.session.add(multiemail)
         db.session.commit()
         return redirect(url_for('homepage.homepage'))
 
@@ -61,5 +63,5 @@ class ContactModelUname(Resource):
         return models.user_schema.jsonify(user)
 
 
-api_v1.add_resource(ContactModelAll, '/allcontacts')
-api_v1.add_resource(ContactModelUname, '/allcontacts/<string:uname>')
+api_v2.add_resource(ContactModelAll, '/allcontacts')
+api_v2.add_resource(ContactModelUname, '/allcontacts/<string:uname>')

@@ -28,13 +28,13 @@ class Contact(db.Model):
 class MultiEmail(db.Model):
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
-    contact_uname = db.Column(db.String(50), db.ForeignKey('contact.uname'), nullable=False)
-    multi_emails = db.Column(db.String(1000), nullable=False)
-
+    contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'), nullable=False)
+    multi_emails = db.Column(db.String(1024), nullable=False)
 
     def __init__(self, contact_id, multi_emails):
-        self.uname = uname
-        self.email = email
+        self.contact_id = contact_id
+        self.multi_emails = multi_emails
+
 
 class UserSchema(ma.Schema):
     class Meta:
