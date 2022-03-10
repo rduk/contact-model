@@ -41,6 +41,8 @@ _Note: If these is any permission related issue while running docker-compose com
     * Go to the project in gitlab
     * Go to Merge requests
     * Select your branch in the left and on the right the target branch (usually master)
-    * Assign the reviewer and Create the Pull reques
+    * Assign the reviewer and Create the Pull requests
+    * Select your branch in the left and on the right the target branch (usually master)
+    * Assign the reviewer and create the Pull Request(PR)
   
  
